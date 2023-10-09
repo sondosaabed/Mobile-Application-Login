@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
-public class MainActivty {
+public class DashboeadActivity {
+
 
 }
