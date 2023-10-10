@@ -1,12 +1,9 @@
 package com.example.myapplication;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import java.util.HashMap;
 
 /*
     In this class I handle the main activity, it will perform login functionality
@@ -22,7 +19,7 @@ public class MainActivity extends AppCompatActivity{
     private TextView answer; // I will use it to display the answer
 
     // I use it to store logins key is the email and the password is the value
-    private final HashMap<String, String> logins = new HashMap<>();
+    private UsersDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -44,43 +41,22 @@ public class MainActivity extends AppCompatActivity{
         /*
             I added some examples to the logins hashmap
          */
-        logins.put("sondos", "free");
-        logins.put("rama", "palestine");
+        setDatabase(new UsersDatabase());
     }
 
     /*
         Handlers
      */
     private void handle_login(Button login) {
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (authenticate(getEmail().getText().toString(), getPassword().getText().toString())== true){
-                    /*
-                        Login successfully
-                     */
-
-                    getAnswer().setText("Successful!");
-                }else {
-                    /*
-                        Wrong authentication
-                     */
-                    getAnswer().setText("Try Again!");
-                }
-            }
+        login.setOnClickListener(view -> {
+            /*
+                    Login successfully
+                 */
+            /*
+                    Wrong authentication
+                 */
+            getAnswer().setText(getDatabase().authenticate(getEmail().getText().toString(), getPassword().getText().toString()) ? "Successful!" : "Try Again!");
         });
-    }
-
-    private boolean authenticate(String email, String password){
-        /*
-            This method will check if the email and password exists in the hash
-            then it will return true else false
-         */
-        if(logins.containsKey(email) && logins.get(email).equals(password)){
-            return true;
-        }else {
-            return false;
-        }
     }
 
     /*
@@ -110,15 +86,19 @@ public class MainActivity extends AppCompatActivity{
         this.password = password;
     }
 
-    public HashMap<String, String> getLogins() {
-        return logins;
-    }
-
     public TextView getAnswer() {
         return answer;
     }
 
     public void setAnswer(TextView answer) {
         this.answer = answer;
+    }
+
+    public UsersDatabase getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(UsersDatabase database) {
+        this.database = database;
     }
 }
