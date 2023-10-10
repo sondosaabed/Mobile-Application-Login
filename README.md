@@ -6,6 +6,9 @@ I plan to build on it, when learning new concepts. Until I make a mobile applica
 <div align = center>
 
   ## Example of running the emulater
-  
-https://github.com/sondosaabed/Mobile-Application-Login/assets/65151701/b1357130-6d81-4d6c-9440-7c5e112e9f0a
+
+
+![untitled](https://github.com/sondosaabed/Mobile-Application-Login/assets/65151701/ec290411-6d4a-483e-b6fd-22eaf00b19bb)
+
+
 </div>
