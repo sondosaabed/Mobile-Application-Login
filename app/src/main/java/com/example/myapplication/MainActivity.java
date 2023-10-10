@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 /*
     In this class I handle the main activity, it will perform login functionality
-    based on a hashmap created here
+    based on a mock database using an arraylist
  */
 public class MainActivity extends AppCompatActivity{
     /*
