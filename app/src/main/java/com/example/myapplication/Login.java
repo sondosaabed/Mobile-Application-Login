@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import java.util.Objects;
+
 public class Login {
     /*
         Fields
@@ -7,7 +9,7 @@ public class Login {
     private String email;
     private String password;
 
-    public Login(String email, String password){
+    public Login(String email, String password) {
         setEmail(email);
         setPassword(password);
     }
@@ -22,5 +24,18 @@ public class Login {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Login)) return false;
+        Login login = (Login) o;
+        return Objects.equals(email, login.email) && Objects.equals(password, login.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email, password);
     }
 }

@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
     In this class I handle the main activity, it will perform login functionality
     based on a hashmap created here
  */
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
     /*
         Fields
     */
@@ -25,30 +25,30 @@ public class MainActivity extends AppCompatActivity{
     private TextView passValid;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         initialize();
     }
 
-    private void initialize(){
+    private void initialize() {
         /*
             Getting the variables in the scene
          */
-               /*
-            I added some examples to the logins hashmap
-         */
-        setDatabase(new UsersDatabase());
-
         setLogin(findViewById(R.id.btnLogin));
         setEmail(findViewById(R.id.email));
         setPassword(findViewById(R.id.password));
         setAnswer(findViewById(R.id.txtResult));
+
         setEmailValid(findViewById(R.id.emailValidation));
         setPassValid(findViewById(R.id.passValidation));
 
         handle_login(getLogin());
+                       /*
+            I added some examples to the logins hashmap
+         */
+        setDatabase(new UsersDatabase());
     }
 
     /*
@@ -56,18 +56,16 @@ public class MainActivity extends AppCompatActivity{
      */
     private void handle_login(Button login) {
         login.setOnClickListener(view -> {
-            boolean authenticated = getDatabase().authenticate(getEmail().getText().toString(), getPassword().getText().toString());
-            if(authenticated){
-                /*
-                    Login successfully
-                */
+            String enteredEmail = getEmail().getText().toString();
+            String enteredPassword = getPassword().getText().toString();
+
+            if (getDatabase().authenticate(enteredEmail, enteredPassword) == true) {
+                // Authentication successful
                 getEmailValid().setVisibility(View.GONE);
                 getPassValid().setVisibility(View.GONE);
                 getAnswer().setText("Successful!");
-            }else {
-                 /*
-                    Wrong authentication
-                 */
+            } else {
+                // Wrong authentication
                 getEmailValid().setVisibility(View.VISIBLE);
                 getPassValid().setVisibility(View.VISIBLE);
                 getEmailValid().setText("Wrong Email");
