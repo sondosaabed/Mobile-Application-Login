@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity{
 
     // I use it to store logins key is the email and the password is the value
     private UsersDatabase database;
+    private TextView emailValid;
+    private TextView passValid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -27,21 +30,25 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         initialize();
-        handle_login(getLogin());
     }
 
-    public void initialize(){
+    private void initialize(){
         /*
             Getting the variables in the scene
          */
+               /*
+            I added some examples to the logins hashmap
+         */
+        setDatabase(new UsersDatabase());
+
         setLogin(findViewById(R.id.btnLogin));
         setEmail(findViewById(R.id.email));
         setPassword(findViewById(R.id.password));
         setAnswer(findViewById(R.id.txtResult));
-        /*
-            I added some examples to the logins hashmap
-         */
-        setDatabase(new UsersDatabase());
+        setEmailValid(findViewById(R.id.emailValidation));
+        setPassValid(findViewById(R.id.passValidation));
+
+        handle_login(getLogin());
     }
 
     /*
@@ -49,13 +56,23 @@ public class MainActivity extends AppCompatActivity{
      */
     private void handle_login(Button login) {
         login.setOnClickListener(view -> {
-            /*
+            boolean authenticated = getDatabase().authenticate(getEmail().getText().toString(), getPassword().getText().toString());
+            if(authenticated){
+                /*
                     Login successfully
-                 */
-            /*
+                */
+                getEmailValid().setVisibility(View.GONE);
+                getPassValid().setVisibility(View.GONE);
+                getAnswer().setText("Successful!");
+            }else {
+                 /*
                     Wrong authentication
                  */
-            getAnswer().setText(getDatabase().authenticate(getEmail().getText().toString(), getPassword().getText().toString()) ? "Successful!" : "Try Again!");
+                getEmailValid().setVisibility(View.VISIBLE);
+                getPassValid().setVisibility(View.VISIBLE);
+                getEmailValid().setText("Wrong Email");
+                getAnswer().setText("Try Again!");
+            }
         });
     }
 
@@ -100,5 +117,21 @@ public class MainActivity extends AppCompatActivity{
 
     public void setDatabase(UsersDatabase database) {
         this.database = database;
+    }
+
+    public TextView getEmailValid() {
+        return emailValid;
+    }
+
+    public void setEmailValid(TextView emailValid) {
+        this.emailValid = emailValid;
+    }
+
+    public TextView getPassValid() {
+        return passValid;
+    }
+
+    public void setPassValid(TextView passValid) {
+        this.passValid = passValid;
     }
 }
