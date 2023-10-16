@@ -7,6 +7,10 @@ I plan to build on it, when learning new concepts. Until I make a mobile applica
 
   ## Example of running the emulater
 
-https://github.com/sondosaabed/Mobile-Application-Login/assets/65151701/56de51bd-025e-4fcc-816f-ab9ed3af3c8a
+
+
+https://github.com/sondosaabed/Mobile-Application-Login/assets/65151701/1825244c-77f9-4515-8e4f-749c9f1e8518
+
+
 
 </div>
